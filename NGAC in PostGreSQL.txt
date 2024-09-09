@@ -1,0 +1,276 @@
+drop table if exists patient_diagnosis;
+drop table if exists patient;
+drop policy if exists patients_policy on patient;
+drop policy if exists doctors_policy on patient;
+drop policy if exists admin_policy on patient;
+drop user if exists doctor1;
+drop user if EXISTS patient1;
+drop user if EXISTS admin_;
+drop role if exists doctors;
+drop role if exists patients;
+drop role if exists admins;
+
+create table patient (id int, name varchar(20), birth_date date, ssn varchar(20),primary key (id));
+create table patient_diagnosis (id int, diagnosis_date date,diagnosis varchar(20),
+								doctor_assigned varchar(20), 
+								foreign key (id) references patient(id));
+
+INSERT INTO patient
+(id, name, birth_date, ssn)
+SELECT n, 'patient' || n as name, current_date - n as birth_date,'12' || n as ssn 
+from generate_series(1, 1000000) as n;
+
+INSERT INTO patient_diagnosis
+(id, diagnosis_date, diagnosis, doctor_assigned)
+SELECT n, current_date - n as diagnosis_date, 'disease' || n as diagnosis, 'doctor' || n as doctor_assigned 
+from generate_series(1, 1000000) as n;
+
+select * from patient;
+select * from patient_diagnosis;
+
+create user doctor1 with password 'dr1';
+create user patient1 with password 'p1';
+create user admin_ with password 'admin';
+
+alter table patient enable row level security;
+alter table patient_diagnosis enable row level security;
+
+create role patients;
+create role doctors;
+create role admins;
+
+grant doctors to doctor1;
+grant patients to patient1;
+grant admins to admin_;
+
+--all the policies
+
+create policy patients_policy on patient for select to patients using (current_user = name);
+
+create policy doctors_policy on patient for select to doctors using(true);
+
+create policy admin_policy on patient for all to admins using(true) with check (true);
+
+create policy patients_policy on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy1 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy1 on patient for select to doctors using(true);
+
+create policy admin_policy1 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy1 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy1 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy2 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy2 on patient for select to doctors using(true);
+
+create policy admin_policy2 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy2 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy2 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy3 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy3 on patient for select to doctors using(true);
+
+create policy admin_policy3 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy3 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy3 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy4 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy4 on patient for select to doctors using(true);
+
+create policy admin_policy4 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy4 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy4 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy5 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy5 on patient for select to doctors using(true);
+
+create policy admin_policy5 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy5 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy5 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy6 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy6 on patient for select to doctors using(true);
+
+create policy admin_policy6 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy6 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy6 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy7 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy7 on patient for select to doctors using(true);
+
+create policy admin_policy7 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy7 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy7 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy8 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy8 on patient for select to doctors using(true);
+
+create policy admin_policy8 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy8 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy8 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy9 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy9 on patient for select to doctors using(true);
+
+create policy admin_policy9 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy9 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy9 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy10 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy10 on patient for select to doctors using(true);
+
+create policy admin_policy10 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy10 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy10 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy11 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy11 on patient for select to doctors using(true);
+
+create policy admin_policy11 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy11 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy11 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy12 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy12 on patient for select to doctors using(true);
+
+create policy admin_policy12 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy12 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy12 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy13 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy13 on patient for select to doctors using(true);
+
+create policy admin_policy13 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy13 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy13 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy14 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy14 on patient for select to doctors using(true);
+
+create policy admin_policy14 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy14 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy14 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy15 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy15 on patient for select to doctors using(true);
+
+create policy admin_policy15 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy15 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy15 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy16 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy16 on patient for select to doctors using(true);
+
+create policy admin_policy16 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy16 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy16 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy17 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy17 on patient for select to doctors using(true);
+
+create policy admin_policy17 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy17 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy17 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy18 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy18 on patient for select to doctors using(true);
+
+create policy admin_policy18 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy18 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+create policy others_policy18 on patient_diagnosis to doctors, admins using(true) with check(true);
+
+create policy patients_policy19 on patient for select to patients using (current_user = name);
+
+create policy doctors_policy19 on patient for select to doctors using(true);
+
+create policy admin_policy19 on patient for all to admins using(true) with check (true);
+
+create policy patients_policy19 on patient_diagnosis to patients using (EXISTS (SELECT 1 FROM patient WHERE patient.id = patient_diagnosis.id AND patient.name = current_user));
+
+
+create policy others_policy on patient_diagnosis to doctors, admins using(true) with check(true);
+
+grant all on patient_diagnosis to doctors;
+grant select (id, doctor_assigned) on patient_diagnosis to admins;
+grant select on patient_diagnosis to patients;
+	
+grant select on patient to patients;
+grant all on patient to admins;
+grant select (id, name)on patient to doctors;
+
+select current_user;
+
+--test for doctors;
+
+select * from patient_diagnosis;
+select * from patient;
+select id, name from patient;
+update patient set name='new_name' where id = 40;
+
+--test for patient;
+select * from patient_diagnosis;
+select * from patient;
+update patient set name='new_name' where id = 40;
+
+--test for admin
+select * from patient;
+select * from patient_diagnosis;
+select id, doctor_assigned from patient_diagnosis;
+
+delete from patient_diagnosis where id = 40;

@@ -1,0 +1,141 @@
+
+
+load data infile 'patient.csv' into table patient
+fields terminated by ','
+ignore 1 lines;
+
+
+-- creating policy table.
+CREATE TABLE IF NOT EXISTS abac_policies (
+    resource VARCHAR(255),
+    attribute_key VARCHAR(255),
+    attribute_value VARCHAR(255),
+    action VARCHAR(255),
+    role VARCHAR(255)
+);
+
+INSERT INTO abac_policies (resource, attribute_key, attribute_value, action, role) VALUES
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients'),
+    ('patient', 'name', 'patient1', 'read', 'patients');
+
+-- creating a function to check policies.
+
+-- abac_policies (resource, attribute_key, attribute_value, action, role) 
+
+DELIMITER //
+
+CREATE FUNCTION check_access(user_role VARCHAR(20), requested_action VARCHAR(20), resource VARCHAR(20))
+RETURNS BOOLEAN
+BEGIN
+    DECLARE allowed BOOLEAN;
+
+    SELECT COUNT(*) INTO allowed
+    FROM abac_policies
+    WHERE role = user_role
+        AND action = requested_action
+        AND resource = resource;
+
+    RETURN allowed;
+END //
+
+DELIMITER ;
+
+SELECT * from patient WHERE 1 <= (SELECT check_access('patients', 'write', 'patient') AS access_allowed);

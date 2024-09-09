@@ -1,0 +1,65 @@
+-- this will return a list of current database objects(table like).
+
+SELECT
+    CASE
+        WHEN relkind = 'r' THEN 'Table'
+        WHEN relkind = 'v' THEN 'View'
+        WHEN relkind = 'i' THEN 'Index'
+        WHEN relkind = 'S' THEN 'Sequence'
+        WHEN relkind = 'f' THEN 'Foreign Table'
+        WHEN relkind = 'p' THEN 'Partitioned Table'
+        ELSE 'Other'
+    END AS object_type,
+    relname AS object_name
+FROM
+    pg_class c
+JOIN
+    pg_namespace n ON c.relnamespace = n.oid
+WHERE
+    n.nspname = 'public'  -- Replace 'public' with the schema name you're interested in
+    AND relkind IN ('r', 'v', 'i', 'S', 'f', 'p')
+ORDER BY
+    object_type, object_name;
+
+
+
+
+
+
+-- this will return all the privilege tables inside information_schema schema.
+
+SELECT table_name FROM information_schema.tables WHERE table_schema = 'information_schema' AND table_name LIKE '%_privileges';
+
+
+
+
+
+
+-- I have granted read access to test_view(it is a view) to doctors
+-- I have granted execute access to totalnoofpatients (it is a function) to doctors
+
+
+
+
+-- this returns users and privilege type.
+create or replace view doctors_privilege as
+select table_name as object_name, grantee, privilege_type from information_schema.table_privileges where grantee = 'doctors'
+union
+SELECT table_name, grantee, privilege_type from information_schema.column_privileges where grantee = 'doctors'
+union
+select routine_name, grantee, privilege_type from information_schema.routine_privileges where grantee = 'doctors'
+union
+select udt_name, grantee, privilege_type from information_schema.udt_privileges where grantee = 'doctors'
+union
+select object_name, grantee, privilege_type from information_schema.usage_privileges where grantee = 'doctors';
+
+
+
+
+
+
+
+-- this tells us in which columns of which tables doctors have access and about the access type.
+
+SELECT grantee, table_name, column_name, privilege_type from information_schema.column_privileges where grantee = 'doctors';
+
